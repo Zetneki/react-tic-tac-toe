@@ -1,0 +1,29 @@
+.game {
+  display: grid;
+  grid-template-areas:
+    ". . settings"
+    "score board info";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 1fr;
+  width: 100%;
+
+  .game-settings {
+    grid-area: settings;
+  }
+
+  .game-score {
+    grid-area: score;
+  }
+  .game-board {
+    grid-area: board;
+  }
+  .game-info {
+    grid-area: info;
+
+    &__title {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+  }
+}

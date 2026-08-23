@@ -1,0 +1,24 @@
+.player-management {
+  &__header {
+    display: flex;
+    gap: 10px;
+  }
+
+  .player-row {
+    display: flex;
+    flex-direction: column;
+
+    &__name {
+      display: inherit;
+      gap: 50px;
+      p {
+        margin-bottom: 5px;
+      }
+    }
+
+    &__handle {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.square {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0;
+  font-size: 2rem;
+  width: calc(300px / 3);
+  height: calc(300px / 3);
+}
+
+.winning {
+  background-color: red;
+  color: white;
+}
+
+.selected {
+  border: 2px solid red;
+}

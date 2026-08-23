@@ -1,0 +1,38 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  z-index: 10;
+
+  &__settings {
+    background-color: white;
+    border: 1px solid black;
+    width: 1000px;
+    height: 500px;
+    position: absolute;
+    inset: 0;
+    place-self: center;
+    padding-top: 22px; //button height
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .main {
+    }
+
+    .player-management {
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+          height: min-content;
+        }
+      }
+    }
+  }
+}

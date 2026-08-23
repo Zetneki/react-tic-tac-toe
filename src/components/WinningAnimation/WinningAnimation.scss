@@ -1,0 +1,111 @@
+.winning-animation {
+  .halftone {
+    position: fixed;
+    inset: 0;
+
+    background: linear-gradient(
+      140deg,
+      rgba(90, 54, 0, 0.9),
+      rgba(0, 57, 83, 0.9)
+    );
+    z-index: 0;
+
+    animation: backgroundIn 0.5s ease-out forwards;
+
+    &::after {
+      content: "";
+
+      position: absolute;
+
+      width: 300%;
+      height: 300%;
+
+      top: -100%;
+      left: -100%;
+
+      background-image: radial-gradient(
+        circle at center,
+        black 50%,
+        transparent 0%
+      );
+
+      transform: rotate(-35deg);
+
+      background-size: 1rem 1rem;
+
+      opacity: 0.4;
+
+      animation: dotsMove 8s linear infinite;
+    }
+  }
+
+  .winner {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: bounceIn 0.6s ease-in 0s 1 normal both;
+    user-select: none;
+    cursor: pointer;
+
+    img {
+      width: 50%;
+      height: 50%;
+    }
+
+    h1 {
+      position: absolute;
+      inset: 0;
+      top: -3%;
+
+      display: inherit;
+      align-items: center;
+      justify-content: center;
+
+      color: white;
+      font-size: 50px;
+      font-weight: 900;
+
+      -webkit-text-stroke: 4px black;
+      text-shadow: 5px 5px black;
+      transform: rotate(3deg);
+    }
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes backgroundIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dotsMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 160px -48px;
+  }
+}
