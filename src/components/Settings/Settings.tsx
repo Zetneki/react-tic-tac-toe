@@ -5,10 +5,12 @@ import PlayerManagement from "./PlayerManagement/PlayerManagement";
 import type { Player } from "../../modules/player";
 import type { PlayerSymbol } from "../../types/playerSymbol";
 import type { SettingsValues } from "../../modules/settingsValues";
+import type { GameType } from "../../types/gameType";
 
 function Settings({
   players,
   currentPlayers,
+  setCurrentPlayers,
   onCreatePlayer,
   onDeletePlayer,
   onSelectPlayer,
@@ -18,6 +20,7 @@ function Settings({
 }: {
   players: Player[];
   currentPlayers: Record<PlayerSymbol, string>;
+  setCurrentPlayers: (players: Record<PlayerSymbol, string>) => void;
   onCreatePlayer: (name: string) => void;
   onDeletePlayer: (id: string) => void;
   onSelectPlayer: (playerId: string, playerSymbol: PlayerSymbol) => void;
@@ -114,6 +117,61 @@ function Settings({
                       ></input>
                     </span>
                   </li>
+                  <li>
+                    Game mode:
+                    <span>
+                      <input
+                        type="radio"
+                        name="gamemode"
+                        value="human-vs-human"
+                        id="human-vs-human"
+                        checked={settingsValues.gameMode === "human-vs-human"}
+                        onChange={(e) => {
+                          const gameMode = e.target.value as GameType;
+                          setSettingsValues({
+                            ...settingsValues,
+                            gameMode,
+                          });
+
+                          setCurrentPlayers({
+                            ...currentPlayers,
+                            O:
+                              players.find((p) => p.id !== currentPlayers.X)
+                                ?.id ?? players[1].id,
+                          });
+
+                          newGame(settingsValues.boardSize);
+                        }}
+                      />
+                      <label htmlFor="human-vs-human">Human vs Human</label>
+                      <input
+                        type="radio"
+                        name="gamemode"
+                        value="human-vs-computer"
+                        id="human-vs-computer"
+                        checked={
+                          settingsValues.gameMode === "human-vs-computer"
+                        }
+                        onChange={(e) => {
+                          const gameMode = e.target.value as GameType;
+                          setSettingsValues({
+                            ...settingsValues,
+                            gameMode,
+                          });
+
+                          setCurrentPlayers({
+                            ...currentPlayers,
+                            O: "computer",
+                          });
+
+                          newGame(settingsValues.boardSize);
+                        }}
+                      />
+                      <label htmlFor="human-vs-computer">
+                        Human vs Computer
+                      </label>
+                    </span>
+                  </li>
                 </ul>
               </div>
             )}
@@ -130,6 +188,7 @@ function Settings({
                   onCreatePlayer={onCreatePlayer}
                   onDeletePlayer={onDeletePlayer}
                   onSelectPlayer={onSelectPlayer}
+                  gameMode={settingsValues.gameMode}
                 />
               </div>
             )}

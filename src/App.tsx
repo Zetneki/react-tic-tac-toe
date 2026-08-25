@@ -12,24 +12,23 @@ import Settings from "./components/Settings/Settings";
 import type { SettingsValues } from "./modules/settingsValues";
 import WinningAnimation from "./components/WinningAnimation/WinningAnimation";
 import type { GameResult } from "./modules/gameResult";
+import type { CurrentPlayerId } from "./types/currentPlayerId";
 
 function App() {
   const [players, setPlayers] = useState<Player[]>([
     {
       id: crypto.randomUUID(),
-      name: "Player X",
-      type: "human",
+      name: "Player 1",
       isDefault: true,
     },
     {
       id: crypto.randomUUID(),
-      name: "Player O",
-      type: "human",
+      name: "Player 2",
       isDefault: true,
     },
   ]);
   const [currentPlayers, setCurrentPlayers] = useState<
-    Record<PlayerSymbol, string>
+    Record<PlayerSymbol, CurrentPlayerId>
   >({
     X: players[0].id,
     O: players[1].id,
@@ -39,6 +38,7 @@ function App() {
     scoreBoardMode: false,
     boardSize: 3,
     winningAnimationMode: false,
+    gameMode: "human-vs-human",
   });
   const [playersStats, setPlayersStats] = useState<PlayerStats[]>([]);
   const [history, setHistory] = useState([
@@ -102,7 +102,6 @@ function App() {
     const newPlayer: Player = {
       id: crypto.randomUUID(),
       name: userName,
-      type: "human",
       isDefault: false,
     };
 
@@ -127,6 +126,22 @@ function App() {
     if (currentPlayers[playerSymbol] === playerId) return;
 
     handleNewGame();
+
+    if (settingsValues.gameMode === "human-vs-computer") {
+      if (playerSymbol === "X") {
+        setCurrentPlayers({
+          X: playerId,
+          O: "computer",
+        });
+      } else {
+        setCurrentPlayers({
+          X: "computer",
+          O: playerId,
+        });
+      }
+
+      return;
+    }
 
     setCurrentPlayers((current) => {
       const updatedPlayers = { ...current };
@@ -166,6 +181,7 @@ function App() {
         <Settings
           players={players}
           currentPlayers={currentPlayers}
+          setCurrentPlayers={setCurrentPlayers}
           onCreatePlayer={createPlayer}
           onDeletePlayer={deletePlayer}
           onSelectPlayer={selectPlayer}
