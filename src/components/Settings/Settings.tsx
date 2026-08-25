@@ -6,6 +6,7 @@ import type { Player } from "../../modules/player";
 import type { PlayerSymbol } from "../../types/playerSymbol";
 import type { SettingsValues } from "../../modules/settingsValues";
 import type { GameType } from "../../types/gameType";
+import type { CurrentPlayerId } from "../../types/currentPlayerId";
 
 function Settings({
   players,
@@ -19,8 +20,8 @@ function Settings({
   newGame,
 }: {
   players: Player[];
-  currentPlayers: Record<PlayerSymbol, string>;
-  setCurrentPlayers: (players: Record<PlayerSymbol, string>) => void;
+  currentPlayers: Record<PlayerSymbol, CurrentPlayerId>;
+  setCurrentPlayers: (players: Record<PlayerSymbol, CurrentPlayerId>) => void;
   onCreatePlayer: (name: string) => void;
   onDeletePlayer: (id: string) => void;
   onSelectPlayer: (playerId: string, playerSymbol: PlayerSymbol) => void;
@@ -134,10 +135,8 @@ function Settings({
                           });
 
                           setCurrentPlayers({
-                            ...currentPlayers,
-                            O:
-                              players.find((p) => p.id !== currentPlayers.X)
-                                ?.id ?? players[1].id,
+                            X: players[0].id,
+                            O: players[1].id,
                           });
 
                           newGame(settingsValues.boardSize);
@@ -160,7 +159,7 @@ function Settings({
                           });
 
                           setCurrentPlayers({
-                            ...currentPlayers,
+                            X: players[0].id,
                             O: "computer",
                           });
 

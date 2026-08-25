@@ -19,5 +19,6 @@
 - [ ] Responsive design - comicbook style
 - [ ] design tokens in css
 - [ ] deploy to github pages
-
-most elvileg a playermanagementben a valasztas megvan meg a currentplayers is, tehat most jonne a board mukodes meg a leaderboard kezeles
+- [ ] on esc key close settings
+- [ ] reset entire scoreboard or individual player
+- [ ] medium and maybe hard mode (minimax)

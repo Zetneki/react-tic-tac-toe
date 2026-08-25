@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import Board from "./components/Board/Board";
 import MoveHistory from "./components/MoveHistory/MoveHistory";
@@ -13,6 +13,8 @@ import type { SettingsValues } from "./modules/settingsValues";
 import WinningAnimation from "./components/WinningAnimation/WinningAnimation";
 import type { GameResult } from "./modules/gameResult";
 import type { CurrentPlayerId } from "./types/currentPlayerId";
+import { calculateComputerMove } from "./helpers/calculateComputerMove";
+import { COMPUTER_ID } from "./constants/computer";
 
 function App() {
   const [players, setPlayers] = useState<Player[]>([
@@ -83,6 +85,35 @@ function App() {
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
+
+  useEffect(() => {
+    if (settingsValues.gameMode !== "human-vs-computer") return;
+
+    const winner = calculateWinner(currentSquares, settingsValues.boardSize);
+    if (winner) return;
+
+    const currentSymbol = isNextX ? "X" : "O";
+    if (currentPlayers[currentSymbol] !== COMPUTER_ID) return;
+
+    const computerMove = calculateComputerMove(currentSquares);
+    if (computerMove === false) return;
+
+    const nextSquares = currentSquares.slice();
+
+    nextSquares[computerMove] = currentSymbol;
+
+    const timeout = setTimeout(() => {
+      handlePlay(nextSquares);
+    }, 400);
+
+    return () => clearTimeout(timeout);
+  }, [
+    currentSquares,
+    isNextX,
+    settingsValues.gameMode,
+    settingsValues.boardSize,
+    currentPlayers,
+  ]);
 
   function handleNewGame(size = settingsValues.boardSize) {
     setHistory([Array(size ** 2).fill(null)]);
@@ -193,7 +224,12 @@ function App() {
       {settingsValues.scoreBoardMode && (
         <div className="game-score">
           <h2>Scoreboard</h2>
-          <Scoreboard playersStats={playersStats} players={players} />
+          <Scoreboard
+            playersStats={playersStats}
+            players={players}
+            gameMode={settingsValues.gameMode}
+            currentPlayers={currentPlayers}
+          />
         </div>
       )}
       <div className="game-board">

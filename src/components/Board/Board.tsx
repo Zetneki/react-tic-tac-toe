@@ -4,6 +4,9 @@ import type { PlayerSymbol } from "../../types/playerSymbol";
 import type { Player } from "../../modules/player";
 import Square from "../Square/Square";
 import "./Board.scss";
+import type { CurrentPlayerId } from "../../types/currentPlayerId";
+import { getPlayerName } from "../../helpers/getPlayerName";
+import { COMPUTER_ID } from "../../constants/computer";
 
 function Board({
   players,
@@ -14,7 +17,7 @@ function Board({
   boardSize,
 }: {
   players: Player[];
-  currentPlayers: Record<PlayerSymbol, string>;
+  currentPlayers: Record<PlayerSymbol, CurrentPlayerId>;
   isNextX: boolean;
   currentSquares: Array<PlayerSymbol | null>;
   onPlay: (nextSquares: Array<PlayerSymbol | null>) => void;
@@ -24,22 +27,23 @@ function Board({
   const [isKeyboardMode, setIsKeyboardMode] = useState(false);
 
   function handleClick(index: number) {
+    const currentSymbol: PlayerSymbol = isNextX ? "X" : "O";
+
+    if (currentPlayers[currentSymbol] === COMPUTER_ID) return;
+
     if (currentSquares[index] || calculateWinner(currentSquares, boardSize))
       return;
+
     const nextSquares = currentSquares.slice();
-    nextSquares[index] = isNextX ? "X" : "O";
+    nextSquares[index] = currentSymbol;
     onPlay(nextSquares);
   }
 
   const winner = calculateWinner(currentSquares, boardSize);
   let status;
   const currentPlayersNames = {
-    X:
-      players.find((player) => player.id === currentPlayers.X)?.name ??
-      "Player X",
-    O:
-      players.find((player) => player.id === currentPlayers.O)?.name ??
-      "Player O",
+    X: getPlayerName(players, currentPlayers, "X"),
+    O: getPlayerName(players, currentPlayers, "O"),
   };
 
   if (winner) {

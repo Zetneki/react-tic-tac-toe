@@ -3,6 +3,7 @@ import type { Player } from "../../../modules/player";
 import "./PlayerManagement.scss";
 import type { PlayerSymbol } from "../../../types/playerSymbol";
 import type { GameType } from "../../../types/gameType";
+import type { CurrentPlayerId } from "../../../types/currentPlayerId";
 
 function PlayerManagement({
   players,
@@ -13,7 +14,7 @@ function PlayerManagement({
   gameMode,
 }: {
   players: Player[];
-  currentPlayers: Record<PlayerSymbol, string>;
+  currentPlayers: Record<PlayerSymbol, CurrentPlayerId>;
   onCreatePlayer: (name: string) => void;
   onDeletePlayer: (id: string) => void;
   onSelectPlayer: (playerId: string, playerSymbol: PlayerSymbol) => void;
