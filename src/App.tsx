@@ -95,7 +95,12 @@ function App() {
     const currentSymbol = isNextX ? "X" : "O";
     if (currentPlayers[currentSymbol] !== COMPUTER_ID) return;
 
-    const computerMove = calculateComputerMove(currentSquares);
+    const computerMove = calculateComputerMove(
+      currentSquares,
+      settingsValues.boardSize,
+      "medium",
+      currentSymbol,
+    );
     if (computerMove === false) return;
 
     const nextSquares = currentSquares.slice();
