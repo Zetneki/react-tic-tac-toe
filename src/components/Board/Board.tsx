@@ -7,10 +7,12 @@ import "./Board.scss";
 import type { CurrentPlayerId } from "../../types/currentPlayerId";
 import { getPlayerName } from "../../helpers/getPlayerName";
 import { COMPUTER_ID } from "../../constants/computer";
+import type { GameType } from "../../types/gameType";
 
 function Board({
   players,
   currentPlayers,
+  gameMode,
   isNextX,
   currentSquares,
   onPlay,
@@ -18,6 +20,7 @@ function Board({
 }: {
   players: Player[];
   currentPlayers: Record<PlayerSymbol, CurrentPlayerId>;
+  gameMode: GameType;
   isNextX: boolean;
   currentSquares: Array<PlayerSymbol | null>;
   onPlay: (nextSquares: Array<PlayerSymbol | null>) => void;
@@ -42,8 +45,8 @@ function Board({
   const winner = calculateWinner(currentSquares, boardSize);
   let status;
   const currentPlayersNames = {
-    X: getPlayerName(players, currentPlayers, "X"),
-    O: getPlayerName(players, currentPlayers, "O"),
+    X: getPlayerName(players, currentPlayers, "X", gameMode),
+    O: getPlayerName(players, currentPlayers, "O", gameMode),
   };
 
   if (winner) {

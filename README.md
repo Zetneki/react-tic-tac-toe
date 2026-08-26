@@ -7,16 +7,16 @@
 - [x] History mode turn off/on in settings (info about history mode -> if a game is finished, changing its history won't change the result)
 - [x] Board size inside settings
 - [x] Keyboard support (arrow keys, spacebar)
-- [ ] Description of the game
 - [x] Winning animation (could be better)
+- [x] 2 game modes: player vs player, player vs computer
+- [x] medium and maybe hard mode (minimax)
+- [x] 3rd gamemode: minimax ai
+- [ ] on esc key close settings
+- [ ] reset entire scoreboard or individual player
+- [ ] Description of the game
 - [ ] Sound effects
 - [ ] Music
 - [ ] Timer
-- [ ] 2 game modes: player vs player, player vs computer
-- [ ] on esc key close settings
-- [ ] reset entire scoreboard or individual player
-- [ ] medium and maybe hard mode (minimax) OPTIMIZE
-- [ ] (3rd gamemode: minimax ai) MOST IGY MENNYIRE LENNE NEHEZ PLUSZBA?
 - [ ] Local storage -> remember game settings, moves, scores
 - [ ] Settings e.g. board size, theme, history mode, timer, sound, winning animation
 - [ ] Theme modes: dark, light

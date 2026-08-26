@@ -30,7 +30,7 @@ export function evaluateBoard(
     // computer's score is added, player's score is subtracted
 
     if (playerCount === 0 && computerCount > 0) score += weights[computerCount];
-    if (computerCount === 0 && playerCount > 0) score -= weights[computerCount];
+    if (computerCount === 0 && playerCount > 0) score -= weights[playerCount];
   }
   return score;
 }

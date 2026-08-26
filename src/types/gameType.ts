@@ -1,1 +1,4 @@
-export type GameType = "human-vs-human" | "human-vs-computer";
+export type GameType =
+  | "human-vs-human"
+  | "human-vs-computer"
+  | "computer-vs-computer";

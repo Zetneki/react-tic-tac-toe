@@ -16,8 +16,9 @@ export function calculateHardMove(
 
   // check all available squares
 
-  let bestMove = availableSquareIndexes[0];
   let bestScore = -Infinity;
+  const bestMoves: number[] = [];
+
   const depth = boardSize === 3 ? 9 : boardSize === 4 ? 4 : 3;
 
   for (const index of availableSquareIndexes) {
@@ -39,9 +40,14 @@ export function calculateHardMove(
 
     if (score > bestScore) {
       bestScore = score;
-      bestMove = index;
+      bestMoves.length = 0;
+      bestMoves.push(index);
+    } else if (score === bestScore) {
+      bestMoves.push(index);
     }
   }
 
-  return bestMove;
+  const randomIndex = Math.floor(Math.random() * bestMoves.length);
+
+  return bestMoves[randomIndex];
 }

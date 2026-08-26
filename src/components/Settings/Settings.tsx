@@ -170,9 +170,35 @@ function Settings({
                       <label htmlFor="human-vs-computer">
                         Human vs Computer
                       </label>
+                      <input
+                        type="radio"
+                        name="gamemode"
+                        value="computer-vs-computer"
+                        id="computer-vs-computer"
+                        checked={
+                          settingsValues.gameMode === "computer-vs-computer"
+                        }
+                        onChange={(e) => {
+                          const gameMode = e.target.value as GameType;
+                          setSettingsValues({
+                            ...settingsValues,
+                            gameMode,
+                          });
+
+                          setCurrentPlayers({
+                            X: "computer",
+                            O: "computer",
+                          });
+
+                          newGame(settingsValues.boardSize);
+                        }}
+                      />
+                      <label htmlFor="computer-vs-computer">
+                        Computer vs Computer
+                      </label>
                     </span>
                   </li>
-                  {settingsValues.gameMode === "human-vs-computer" && (
+                  {settingsValues.gameMode !== "human-vs-human" && (
                     <li>
                       Computer difficulty:
                       <span>

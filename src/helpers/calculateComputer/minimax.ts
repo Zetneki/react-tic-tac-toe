@@ -18,7 +18,7 @@ export function minimax(
 
   // return a score based on the result
 
-  if (result) return result.square === computerSymbol ? 10000 : -10000;
+  if (result) return result.square === computerSymbol ? 1000000 : -1000000;
 
   if (result === false) return 0;
 

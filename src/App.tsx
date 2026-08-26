@@ -88,7 +88,11 @@ function App() {
   }
 
   useEffect(() => {
-    if (settingsValues.gameMode !== "human-vs-computer") return;
+    const isComputerGame =
+      settingsValues.gameMode === "human-vs-computer" ||
+      settingsValues.gameMode === "computer-vs-computer";
+
+    if (!isComputerGame) return;
 
     const winner = calculateWinner(currentSquares, settingsValues.boardSize);
     if (winner) return;
@@ -243,6 +247,7 @@ function App() {
         <Board
           players={players}
           currentPlayers={currentPlayers}
+          gameMode={settingsValues.gameMode}
           isNextX={isNextX}
           currentSquares={currentSquares}
           onPlay={handlePlay}

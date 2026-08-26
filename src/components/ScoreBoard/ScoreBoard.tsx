@@ -17,6 +17,8 @@ function Scoreboard({
   gameMode: GameType;
   currentPlayers: Record<PlayerSymbol, CurrentPlayerId>;
 }) {
+  if (gameMode === "computer-vs-computer")
+    return <div>Computer vs Computer games don't have a scoreboard</div>;
   const humanPlayerId =
     currentPlayers.X === COMPUTER_ID ? currentPlayers.O : currentPlayers.X;
   const visibleStats =
