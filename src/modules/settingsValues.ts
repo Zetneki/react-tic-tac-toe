@@ -1,3 +1,4 @@
+import type { DifficultyType } from "../types/difficultyType";
 import type { GameType } from "../types/gameType";
 
 export interface SettingsValues {
@@ -6,6 +7,7 @@ export interface SettingsValues {
   boardSize: number;
   winningAnimationMode: boolean;
   gameMode: GameType;
+  difficulty: DifficultyType;
 }
 
 // theme,

@@ -41,6 +41,7 @@ function App() {
     boardSize: 3,
     winningAnimationMode: false,
     gameMode: "human-vs-human",
+    difficulty: "easy",
   });
   const [playersStats, setPlayersStats] = useState<PlayerStats[]>([]);
   const [history, setHistory] = useState([
@@ -98,7 +99,7 @@ function App() {
     const computerMove = calculateComputerMove(
       currentSquares,
       settingsValues.boardSize,
-      "medium",
+      settingsValues.difficulty,
       currentSymbol,
     );
     if (computerMove === false) return;
@@ -117,6 +118,7 @@ function App() {
     isNextX,
     settingsValues.gameMode,
     settingsValues.boardSize,
+    settingsValues.difficulty,
     currentPlayers,
   ]);
 

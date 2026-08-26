@@ -7,6 +7,7 @@ import type { PlayerSymbol } from "../../types/playerSymbol";
 import type { SettingsValues } from "../../modules/settingsValues";
 import type { GameType } from "../../types/gameType";
 import type { CurrentPlayerId } from "../../types/currentPlayerId";
+import type { DifficultyType } from "../../types/difficultyType";
 
 function Settings({
   players,
@@ -171,6 +172,29 @@ function Settings({
                       </label>
                     </span>
                   </li>
+                  {settingsValues.gameMode === "human-vs-computer" && (
+                    <li>
+                      Computer difficulty:
+                      <span>
+                        <select
+                          value={settingsValues.difficulty}
+                          onChange={(e) => {
+                            const difficulty = e.target.value as DifficultyType;
+                            setSettingsValues({
+                              ...settingsValues,
+                              difficulty,
+                            });
+
+                            newGame(settingsValues.boardSize);
+                          }}
+                        >
+                          <option value="easy">Easy</option>
+                          <option value="medium">Medium</option>
+                          <option value="hard">Hard</option>
+                        </select>
+                      </span>
+                    </li>
+                  )}
                 </ul>
               </div>
             )}

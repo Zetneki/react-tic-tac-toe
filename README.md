@@ -15,8 +15,8 @@
 - [ ] 2 game modes: player vs player, player vs computer
 - [ ] on esc key close settings
 - [ ] reset entire scoreboard or individual player
-- [ ] medium and maybe hard mode (minimax)
-- [ ] (3rd gamemode: minimax ai)
+- [ ] medium and maybe hard mode (minimax) OPTIMIZE
+- [ ] (3rd gamemode: minimax ai) MOST IGY MENNYIRE LENNE NEHEZ PLUSZBA?
 - [ ] Local storage -> remember game settings, moves, scores
 - [ ] Settings e.g. board size, theme, history mode, timer, sound, winning animation
 - [ ] Theme modes: dark, light
