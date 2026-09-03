@@ -207,7 +207,8 @@ function App() {
     loserId: string,
     draw: boolean = false,
   ) {
-    if (isGameFinished) return;
+    if (isGameFinished || winnerId === COMPUTER_ID || loserId === COMPUTER_ID)
+      return;
 
     const updatedStats = updateStats(playersStats, winnerId, loserId, draw);
     setPlayersStats(updatedStats);
