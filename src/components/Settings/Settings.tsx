@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Settings.scss";
 import type { SettingsPage } from "../../types/settingsPage";
 import PlayerManagement from "./PlayerManagement/PlayerManagement";
@@ -32,6 +32,27 @@ function Settings({
 }) {
   const [open, setOpen] = useState<boolean>(false);
   const [page, setPage] = useState<SettingsPage>("main");
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        switch (page) {
+          case "main":
+            setOpen(false);
+            break;
+          case "players":
+            setPage("main");
+            break;
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   return (
     <>

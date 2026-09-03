@@ -11,7 +11,7 @@
 - [x] 2 game modes: player vs player, player vs computer
 - [x] medium and maybe hard mode (minimax)
 - [x] 3rd gamemode: minimax ai
-- [ ] on esc key close settings
+- [x] on esc key close settings
 - [ ] reset entire scoreboard or individual player
 - [ ] Description of the game
 - [ ] Sound effects
