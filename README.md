@@ -23,3 +23,4 @@
 - [ ] Responsive design - comicbook style or neon terminal style
 - [ ] design tokens in css
 - [ ] deploy to github pages
+- [ ] https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Installing#installing_and_uninstalling_pwas
