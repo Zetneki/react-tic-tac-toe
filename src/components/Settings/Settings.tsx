@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Settings.scss";
 import type { SettingsPage } from "../../types/settingsPage";
 import PlayerManagement from "./PlayerManagement/PlayerManagement";
@@ -33,6 +33,23 @@ function Settings({
   const [open, setOpen] = useState<boolean>(false);
   const [page, setPage] = useState<SettingsPage>("main");
 
+  const settingsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const isClickedOutside = (event: MouseEvent) => {
+      if (
+        settingsRef.current &&
+        !settingsRef.current.contains(event.target as Node)
+      )
+        setOpen(false);
+    };
+
+    window.addEventListener("mousedown", isClickedOutside);
+    return () => window.removeEventListener("mousedown", isClickedOutside);
+  }, [open]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -59,7 +76,7 @@ function Settings({
       <button onClick={() => setOpen(!open)}>Settings</button>
       {open && (
         <div className="overlay">
-          <div className="overlay__settings">
+          <div className="overlay__settings" ref={settingsRef}>
             <button className="close" onClick={() => setOpen(false)}>
               Close
             </button>
